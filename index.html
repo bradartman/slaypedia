@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>no cap slang — GenZ Dictionary & Phrase Generator</title>
+  <meta name="description" content="Generate GenZ slang words and sentences. Search the complete GenZ dictionary. Fr fr no cap.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <div class="wrapper">
+
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <span class="logo-emoji">✨</span>
+        no cap slang
+      </div>
+      <p class="tagline">The only GenZ dictionary that slaps, fr fr</p>
+    </header>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <span class="stat-chip"><strong id="count-total">—</strong> total terms</span>
+      <span class="stat-chip"><strong id="count-noun">—</strong> nouns</span>
+      <span class="stat-chip"><strong id="count-verb">—</strong> verbs</span>
+      <span class="stat-chip"><strong id="count-adjective">—</strong> adjectives</span>
+      <span class="stat-chip"><strong id="count-exclamation">—</strong> exclamations</span>
+      <span class="stat-chip"><strong id="count-phrase">—</strong> phrases</span>
+    </div>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist" aria-label="Main navigation">
+      <button class="tab-btn active" data-tab="generator" role="tab" onclick="switchTab('generator')">🎲 Generator</button>
+      <button class="tab-btn" data-tab="dictionary" role="tab" onclick="switchTab('dictionary')">📖 Dictionary</button>
+      <button class="tab-btn" data-tab="sentence" role="tab" onclick="switchTab('sentence')">💬 Sentence Builder</button>
+    </nav>
+
+    <!-- ── Generator Tab ─────────────────────────────────────────── -->
+    <div class="tab-panel active" id="tab-generator" role="tabpanel">
+
+      <div class="card">
+        <p class="section-label">Filter by word type</p>
+        <div class="pills">
+          <button class="filter-pill active" data-type="all"         onclick="setFilter('all')">✦ All</button>
+          <button class="filter-pill"         data-type="noun"        onclick="setFilter('noun')">Noun</button>
+          <button class="filter-pill"         data-type="verb"        onclick="setFilter('verb')">Verb</button>
+          <button class="filter-pill"         data-type="adjective"   onclick="setFilter('adjective')">Adjective</button>
+          <button class="filter-pill"         data-type="exclamation" onclick="setFilter('exclamation')">Exclamation</button>
+          <button class="filter-pill"         data-type="phrase"      onclick="setFilter('phrase')">Phrase</button>
+        </div>
+
+        <div class="btn-row" style="margin-bottom:20px">
+          <button class="btn btn-primary" onclick="generate()">
+            🎲 Generate
+          </button>
+          <button class="btn btn-secondary" id="copy-btn" onclick="copyResult()">Copy 📋</button>
+        </div>
+
+        <!-- Result -->
+        <div class="card" id="result-card" style="margin-bottom:0">
+          <p class="empty-state" style="text-align:center">Hit <strong>Generate</strong> to get your first word ✨</p>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="card">
+        <p class="section-label">Recently generated</p>
+        <div id="history-list">
+          <p class="empty-state">Your generated words will appear here ✨</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Dictionary Tab ─────────────────────────────────────────── -->
+    <div class="tab-panel" id="tab-dictionary" role="tabpanel">
+
+      <div class="card">
+        <div class="search-wrap">
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search a term, definition, or type…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search GenZ slang dictionary"
+          >
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+
+        <div id="search-results">
+          <p class="empty-state">Start typing to search the dictionary 📖</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Sentence Builder Tab ───────────────────────────────────── -->
+    <div class="tab-panel" id="tab-sentence" role="tabpanel">
+
+      <div class="card">
+        <p class="section-label">Sentence vibe</p>
+        <div class="pills">
+          <button class="style-pill active" data-style="hype"      onclick="setSentenceStyle('hype')">🔥 Hype</button>
+          <button class="style-pill"         data-style="savage"    onclick="setSentenceStyle('savage')">🗡️ Savage</button>
+          <button class="style-pill"         data-style="wholesome" onclick="setSentenceStyle('wholesome')">🫶 Wholesome</button>
+          <button class="style-pill"         data-style="confused"  onclick="setSentenceStyle('confused')">😵 Confused</button>
+          <button class="style-pill"         data-style="dramatic"  onclick="setSentenceStyle('dramatic')">🎭 Dramatic</button>
+        </div>
+
+        <div class="btn-row" style="margin-bottom:20px">
+          <button class="btn btn-primary" onclick="buildSentence()">
+            💬 Build Sentence
+          </button>
+          <button class="btn btn-secondary" id="copy-sentence-btn" onclick="copySentence()">Copy 📋</button>
+        </div>
+
+        <div id="sentence-output" class="placeholder">
+          Hit <strong>Build Sentence</strong> to generate GenZ gold ✨
+        </div>
+      </div>
+
+      <div class="card" id="sentence-breakdown">
+        <p class="empty-state" style="text-align:center">Generate a sentence to see the word breakdown 🔍</p>
+      </div>
+
+    </div>
+
+  </div><!-- /wrapper -->
+
+  <script src="slang-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
