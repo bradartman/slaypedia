@@ -11,7 +11,7 @@ const SENTENCE_TEMPLATES = {
     (n, v, vp, a, e) => `${e}! The ${n} just ${vp} and it's ${a}, no cap fr fr.`,
     (n, v, vp, a, e) => `${e} — she ${vp} with ${a} ${n} energy and absolutely ate.`,
     (n, v, vp, a, e) => `Not the ${n} being this ${a}. ${e}! She understood the assignment.`,
-    (n, v, vp, a, e) => `The ${a} ${n} said "${e}" and then ${vp} — periodt.`,
+    (n, v, vp, a, e) => `The ${a} ${n} said "${e}" and then ${vp} — no crumbs left.`,
     (n, v, vp, a, e) => `${e}! Bestie, you ${vp} that ${n} with ${a} energy and left no crumbs.`,
   ],
   savage: [
@@ -25,7 +25,7 @@ const SENTENCE_TEMPLATES = {
     (n, v, vp, a, e) => `The ${n} ${vp} today and it was so ${a}. ${e} — green flag behavior.`,
     (n, v, vp, a, e) => `${e}! A ${a} ${n} who ${v}s? That's bestie material, no cap.`,
     (n, v, vp, a, e) => `She ${vp} with ${a} ${n} energy and I'm sending you this as a love language. ${e}.`,
-    (n, v, vp, a, e) => `The way the ${n} was so ${a} when he ${vp}. ${e} — valid behavior, periodt.`,
+    (n, v, vp, a, e) => `The way the ${n} was so ${a} when he ${vp}. ${e} — valid behavior fr.`,
     (n, v, vp, a, e) => `${e}! Your ${n} era is ${a} and everyone can see you understood the assignment.`,
   ],
   confused: [
@@ -40,7 +40,7 @@ const SENTENCE_TEMPLATES = {
     (n, v, vp, a, e) => `${e}! The ${a} ${n} ${vp} and I'm fully in my villain era now.`,
     (n, v, vp, a, e) => `I watched the ${n} ${v} in ${a} glory and honestly? I'm unwell. ${e}.`,
     (n, v, vp, a, e) => `The ${a} ${n} ${vp} and it hit different. ${e}. I am not okay.`,
-    (n, v, vp, a, e) => `${e} — the ${n} was so ${a} when it ${vp}. Main character moment. Periodt.`,
+    (n, v, vp, a, e) => `${e} — the ${n} was so ${a} when it ${vp}. Main character moment, full stop.`,
   ],
 };
 
@@ -175,7 +175,8 @@ function runSearch() {
 
 // ── Sentence Builder Tab ──────────────────────────────────────────────────
 function buildSentence() {
-  const nouns = SLANG_DATA.filter(e => e.type === 'noun');
+  // exclude multi-word nouns and acronyms so they don't land awkwardly as sentence subjects
+  const nouns = SLANG_DATA.filter(e => e.type === 'noun' && !e.word.includes(' ') && e.word === e.word.toLowerCase());
   const verbs = SLANG_DATA.filter(e => e.type === 'verb');
   const adjs = SLANG_DATA.filter(e => e.type === 'adjective');
   const excs = SLANG_DATA.filter(e => e.type === 'exclamation');
