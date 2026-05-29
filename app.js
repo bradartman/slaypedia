@@ -267,6 +267,12 @@ function updateCounts() {
   });
   const total = document.getElementById('count-total');
   if (total) total.textContent = SLANG_DATA.length;
+
+  const updated = document.getElementById('last-updated');
+  if (updated) {
+    const d = new Date('2026-05-29');
+    updated.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
